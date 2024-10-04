@@ -5,17 +5,9 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<flow name="orders-eapiFlow" doc:id="08d0ad33-6a19-43ed-a293-f057a34baa68" >
-		<http:listener doc:name="Listener" doc:id="51d68c96-bfd3-4db6-a80a-1711b595e7c3" config-ref="HTTP_Listener_config" path="/orders"/>
-		<ee:transform doc:name="hello" doc:id="0a8e5575-d680-4269-ab39-00635811eccb" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-	"message" :  "hello"
-}]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
-	</flow>
+	<sub-flow name="Post_orders" doc:id="11a333c8-622f-40fa-8f5f-d809aea3b243" >
+		<logger level="INFO" doc:name="Start Post orders" doc:id="50293e59-1afc-496d-bc15-0c62805bc24f" message='Start "Post Orders"'/>
+		<http:request method="GET" doc:name="Call papi-orders" doc:id="e330fbd4-c9d3-4996-8653-6493ba460b54" config-ref="HTTP_Request_configuration" path="/orders"/>
+		<logger level="INFO" doc:name="End Post orders" doc:id="60d02bdf-52d4-49e5-8f69-a2fccaa9800b" message="End Post orders"/>
+	</sub-flow>
 </mule>
