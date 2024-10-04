@@ -1,0 +1,16 @@
+api:
+  id: "123"
+  listener:
+    path: "/*"
+
+http:
+  listener:
+    host: "0.0.0.0"
+    port: "8091" 
+
+    
+orders-papi:
+  host: "0.0.0.0"
+  protocol: "HTTP"
+  port: "8082"
+  basePath: ""
