@@ -13,6 +13,6 @@ http:
 orders-papi:
   host: "0.0.0.0"
   protocol: "HTTP"
-  port: "8082"
-  basePath: ""
+  port: "8092"
+  basePath: "/api"
     
