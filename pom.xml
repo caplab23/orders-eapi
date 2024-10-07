@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>orders-eapi</artifactId>
+	<artifactId>eapi-orders</artifactId>
 	<version>1.0.1</version>
 	<packaging>mule-application</packaging>
 
-	<name>orders-eapi</name>
+	<name>eapi-orders</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
