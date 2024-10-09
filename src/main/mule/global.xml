@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+    <apikit:config name="eapi-orders-config" api="resource::a29291be-9db7-4128-b6f7-40160ea37383:eapi-orders:1.0.0:raml:zip:eapi-orders.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="48f30d8a-ef6b-414a-9bae-8e86f598019f" >
-		<http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
+		<http:listener-connection host="${http.listener.host}" port="${http.listener.port}" usePersistentConnections="false"/>
 	</http:listener-config>
 	<configuration-properties doc:name="Configuration properties" doc:id="d58a2f34-0aa7-4341-97d9-ea42da07d638" file="properties/${mule.env}.yaml" />
 	<global-property doc:name="Global Property" doc:id="8a921f7b-fa9c-4d68-b707-b2f01ed5e918" name="mule.env" value="loc" />
-	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="0680b7a5-b2f3-4103-a814-65c50315c737" basePath="${orders-papi.basePath}" >
-		<http:request-connection protocol="${orders-papi.protocol}" host="${orders-papi.host}" port="${orders-papi.port}" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="0680b7a5-b2f3-4103-a814-65c50315c737" basePath="${papi-orders.basePath}" >
+		<http:request-connection protocol="${papi-orders.protocol}" host="${papi-orders.host}" port="${papi-orders.port}" />
 	</http:request-config>
 	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="862357f9-6346-4d16-8fa4-60cd9f4f7986" flowRef="eapi-orders-main" />
 </mule>
